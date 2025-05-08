@@ -1,0 +1,293 @@
+/* Public Menu Styles */
+/* .public-menu is now handled by Tailwind in PublicMenu.js */
+
+/* Loading State */
+.public-menu-loading {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #4a90e2;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error States */
+.public-menu-error, .public-menu-empty {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.public-menu-error h2, .public-menu-empty h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #343a40;
+}
+
+.public-menu-error p, .public-menu-empty p {
+    font-size: 1rem;
+    max-width: 500px;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+/* Header styles are now primarily handled by Tailwind in PublicMenu.js */
+/* .menu-header, .menu-logo, .menu-logo img, .menu-title, .menu-title h1, .menu-title h2, .menu-actions, .menu-actions button, .menu-actions button:hover */
+
+/* Search styles are now primarily handled by Tailwind in PublicMenu.js */
+/* .search-container, .search-container input, .clear-search */
+
+/* Menu Body layout is now handled by Tailwind in PublicMenu.js */
+/* .menu-body */
+
+/* Category Navigation styles are now primarily handled by Tailwind in PublicMenu.js */
+/* .category-nav, .category-nav ul, .category-nav li, .category-nav li:hover, .category-nav li.active */
+
+/* Menu Content padding is handled by Tailwind in PublicMenu.js */
+/* .menu-content */
+
+/* Category Section general spacing and borders are handled by Tailwind in PublicMenu.js */
+/* .category-section, .category-section:last-child */
+
+/* Category title and description styles are now primarily handled by Tailwind in PublicMenu.js */
+/* .category-section h2, .category-description */
+
+/* Grid Layout */
+.menu-content.grid .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+/* List Layout */
+.menu-content.list .product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-content.list .product-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-content.list .product-image {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    margin-right: 1rem;
+}
+
+/* Product Items */
+.product-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    height: 180px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.product-details {
+    padding: 1rem;
+}
+
+.product-name-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.product-name-price h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* Unavailable Products */
+.product-item.unavailable {
+    opacity: 0.6;
+}
+
+.unavailable-label {
+    display: inline-block;
+    background-color: #dc3545;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.no-results p {
+    margin-bottom: 1rem;
+    color: #6c757d;
+}
+
+.no-results button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Footer */
+.menu-footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+    color: white;
+}
+
+.menu-footer p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+.powered-by {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .menu-body {
+        flex-direction: column;
+    }
+    
+    .category-nav {
+        width: 100%;
+        height: auto;
+        padding: 0.5rem;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .category-nav ul {
+        display: flex;
+    }
+    
+    .category-nav li {
+        padding: 0.75rem 1rem;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+    
+    .category-nav li.active {
+        border-left-color: transparent;
+        border-bottom-color: currentColor;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .menu-title h1 {
+        font-size: 1.1rem;
+    }
+    
+    .menu-title h2 {
+        font-size: 0.9rem;
+    }
+    
+    .menu-content.grid .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .menu-content.list .product-item {
+        flex-direction: column;
+    }
+    
+    .menu-content.list .product-image {
+        width: 100%;
+        height: 180px;
+        margin-right: 0;
+    }
+    
+    .category-section h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .menu-header {
+        padding: 0.75rem;
+    }
+    
+    .menu-content {
+        padding: 0.75rem;
+    }
+    
+    .menu-content.grid .product-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-image {
+        height: 160px;
+    }
+}

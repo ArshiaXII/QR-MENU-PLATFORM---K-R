@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Super Simple Backend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f3f3f3;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backend Server Connection Test</h1>
+    <p>This page will test your backend server connection and see if it's working correctly. Just click the button below.</p>
+    
+    <button onclick="testBackend()">Test Backend Connection</button>
+    <button onclick="document.getElementById('result').innerHTML = ''">Clear Result</button>
+    
+    <div id="result" class="result"></div>
+    
+    <script>
+        function testBackend() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing connection...';
+            
+            // Test URLs
+            const urls = [
+                'http://127.0.0.1:3001/test',
+                'http://localhost:3001/test',
+                'http://127.0.0.1:3001',
+                'http://localhost:3001'
+            ];
+            
+            // Keep track of successful connections
+            let successCount = 0;
+            let resultHTML = '<h3>Connection Test Results:</h3>';
+            
+            // Function to test one URL
+            async function testURL(url) {
+                try {
+                    const startTime = new Date().getTime();
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*'
+                        }
+                    });
+                    const endTime = new Date().getTime();
+                    const responseTime = endTime - startTime;
+                    
+                    if (response.ok) {
+                        successCount++;
+                        let responseData;
+                        try {
+                            responseData = await response.text();
+                        } catch (e) {
+                            responseData = "Could not read response body";
+                        }
+                        
+                        resultHTML += `<p class="success">✅ Success! ${url} - ${response.status} ${response.statusText} (${responseTime}ms)</p>`;
+                        resultHTML += `<p>Response: ${responseData.substring(0, 100)}${responseData.length > 100 ? '...' : ''}</p>`;
+                    } else {
+                        resultHTML += `<p class="error">❌ Failed! ${url} - ${response.status} ${response.statusText}</p>`;
+                    }
+                } catch (error) {
+                    resultHTML += `<p class="error">❌ Error! ${url} - ${error.message}</p>`;
+                }
+            }
+            
+            // Test all URLs
+            Promise.all(urls.map(url => testURL(url)))
+                .then(() => {
+                    if (successCount > 0) {
+                        resultHTML += `<p class="success">✅ Backend is accessible! ${successCount} of ${urls.length} endpoints worked.</p>`;
+                        resultHTML += `<p>You should be able to access your application now.</p>`;
+                    } else {
+                        resultHTML += `<p class="error">❌ Backend is NOT accessible! All ${urls.length} endpoints failed.</p>`;
+                        resultHTML += `<h3>Troubleshooting steps:</h3>`;
+                        resultHTML += `<ol>
+                            <li>Make sure your backend server is running in a terminal window</li>
+                            <li>Check if port 5000 is blocked by a firewall or antivirus</li>
+                            <li>Make sure no other application is using port 5000</li>
+                            <li>Try disabling Windows Defender Firewall temporarily</li>
+                            <li>Try restarting the backend server with: node server.js</li>
+                        </ol>`;
+                    }
+                    result.innerHTML = resultHTML;
+                });
+        }
+    </script>
+</body>
+</html> 

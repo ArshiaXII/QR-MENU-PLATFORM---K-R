@@ -1,0 +1,465 @@
+.template-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.template-tabs {
+    display: flex;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.template-tabs .tab {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6c757d;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.template-tabs .tab:hover {
+    color: #4a90e2;
+}
+
+.template-tabs .tab.active {
+    color: #4a90e2;
+    border-bottom-color: #4a90e2;
+}
+
+/* Preset Templates */
+.template-presets {
+    margin-bottom: 15px;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.template-preview {
+    border: 2px solid;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-preview:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.template-preview-header {
+    padding: 5px;
+    text-align: center;
+}
+
+.template-preview-header h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.template-preview-content {
+    padding: 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.preview-item {
+    border: 1px solid;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.preview-image {
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.preview-text {
+    padding: 5px;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Custom Settings */
+.template-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.setting-group input[type="text"],
+.setting-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.setting-group select {
+    height: 38px;
+}
+
+.color-picker {
+    display: flex;
+    align-items: center;
+}
+
+.color-picker input[type="color"] {
+    border: none;
+    border-radius: 4px;
+    height: 38px;
+    width: 38px;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.color-picker input[type="text"] {
+    flex: 1;
+}
+
+.logo-upload {
+    margin-top: 5px;
+}
+
+.logo-upload input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px dashed #ced4da;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.logo-preview {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-preview img {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    background-color: white;
+    object-fit: contain;
+}
+
+.logo-preview button {
+    background-color: #f8d7da;
+    color: #dc3545;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Saved Templates */
+.saved-templates {
+    margin-top: 10px;
+}
+
+.saved-templates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.saved-template-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.saved-template-item:hover {
+    background-color: #e9ecef;
+}
+
+.saved-template-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.saved-template-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.saved-template-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.saved-template-actions button {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.load-template {
+    color: #4a90e2;
+    background-color: #e3f2fd;
+}
+
+.delete-template {
+    color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.no-saved-templates {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+}
+
+/* Template Preview */
+.preview-container {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 250px;
+}
+
+.preview-header {
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-logo {
+    margin-bottom: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.preview-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.preview-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.preview-content {
+    padding: 15px;
+    overflow-y: auto;
+    height: calc(100% - 70px);
+}
+
+.preview-category {
+    margin-bottom: 15px;
+}
+
+.preview-category h3 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+}
+
+.preview-items {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.preview-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.preview-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.preview-description {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin: 4px 0;
+}
+
+.preview-price {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Template Actions */
+.template-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.apply-template-button,
+.save-template-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.apply-template-button {
+    background-color: #4a90e2;
+    color: white;
+    flex: 1;
+}
+
+.apply-template-button:hover {
+    background-color: #3a7bc8;
+}
+
+.save-template-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.save-template-button:hover {
+    background-color: #218838;
+}
+
+/* Save Template Dialog */
+.save-template-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.save-template-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 90%;
+}
+
+.save-template-content h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.save-template-content input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.save-template-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.save-template-actions button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.save-template-actions button:first-child {
+    background-color: #28a745;
+    color: white;
+}
+
+.save-template-actions button:last-child {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .template-settings {
+        grid-template-columns: 1fr;
+    }
+    
+    .template-tabs .tab {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .template-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    
+    .template-preview {
+        height: 130px;
+    }
+}
+
+@media (max-width: 576px) {
+    .template-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .template-actions {
+        flex-direction: column;
+    }
+} 

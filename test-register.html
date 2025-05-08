@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Register API Test</h1>
+    <p>This page tests the register API endpoint directly.</p>
+    
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="test@example.com">
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" value="password123">
+    </div>
+    
+    <div class="form-group">
+        <label for="restaurantName">Restaurant Name:</label>
+        <input type="text" id="restaurantName" value="Test Restaurant">
+    </div>
+    
+    <button id="registerBtn">Test Register</button>
+    <div id="result">Results will appear here...</div>
+
+    <script>
+        document.getElementById('registerBtn').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Sending registration request...';
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const restaurantName = document.getElementById('restaurantName').value;
+            
+            try {
+                resultDiv.textContent += '\nAttempting to connect to: http://localhost:3001/api/auth/register';
+                
+                const response = await fetch('http://localhost:3001/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password, restaurantName })
+                });
+                
+                resultDiv.textContent += `\nResponse status: ${response.status} ${response.statusText}`;
+                
+                try {
+                    const data = await response.json();
+                    resultDiv.textContent += '\nResponse data: ' + JSON.stringify(data, null, 2);
+                    
+                    if (response.ok) {
+                        resultDiv.textContent += '\n\nNow you can try logging in with these credentials!';
+                    }
+                } catch (e) {
+                    resultDiv.textContent += '\nError parsing JSON: ' + e.message;
+                }
+            } catch (error) {
+                resultDiv.textContent += '\nFetch error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html> 

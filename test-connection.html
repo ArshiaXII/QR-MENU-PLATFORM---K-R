@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+        #log {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backend Connection Test</h1>
+    <p>This page tests if your backend server is properly running and accessible.</p>
+    
+    <button id="testRoot">Test Root Endpoint (http://127.0.0.1:5000/)</button>
+    <button id="testApi">Test API Endpoint (http://127.0.0.1:5000/api/auth)</button>
+    <button id="testLocalhost">Test Localhost (http://localhost:5000/)</button>
+    <button id="clearLog">Clear Log</button>
+    
+    <div id="results"></div>
+    
+    <h3>Connection Log:</h3>
+    <div id="log"></div>
+    
+    <script>
+        const resultsDiv = document.getElementById('results');
+        const logDiv = document.getElementById('log');
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function showResult(message, isSuccess) {
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${isSuccess ? 'success' : 'error'}`;
+            resultDiv.textContent = message;
+            resultsDiv.appendChild(resultDiv);
+        }
+        
+        async function testEndpoint(url) {
+            log(`Testing connection to: ${url}`);
+            
+            try {
+                const startTime = performance.now();
+                const response = await fetch(url, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+                const endTime = performance.now();
+                const timeElapsed = (endTime - startTime).toFixed(2);
+                
+                if (response.ok) {
+                    log(`✅ Success! Response received in ${timeElapsed}ms`);
+                    let responseText = '';
+                    try {
+                        const data = await response.text();
+                        responseText = data.substring(0, 100) + (data.length > 100 ? '...' : '');
+                    } catch (e) {
+                        responseText = 'Could not read response body';
+                    }
+                    
+                    showResult(`Connection to ${url} succeeded (${response.status} ${response.statusText}) in ${timeElapsed}ms`, true);
+                    log(`Response: ${responseText}`);
+                } else {
+                    log(`❌ Failed with status: ${response.status} ${response.statusText}`);
+                    showResult(`Connection to ${url} failed with status: ${response.status} ${response.statusText}`, false);
+                }
+            } catch (error) {
+                log(`❌ Error: ${error.message}`);
+                showResult(`Connection to ${url} failed: ${error.message}`, false);
+            }
+        }
+        
+        document.getElementById('testRoot').addEventListener('click', () => {
+            testEndpoint('http://127.0.0.1:5000/');
+        });
+        
+        document.getElementById('testApi').addEventListener('click', () => {
+            testEndpoint('http://127.0.0.1:5000/api/auth');
+        });
+        
+        document.getElementById('testLocalhost').addEventListener('click', () => {
+            testEndpoint('http://localhost:5000/');
+        });
+        
+        document.getElementById('clearLog').addEventListener('click', () => {
+            logDiv.innerHTML = '';
+            resultsDiv.innerHTML = '';
+        });
+        
+        // Initial test on page load
+        log('Page loaded. Click any button to test connection.');
+    </script>
+</body>
+</html> 
